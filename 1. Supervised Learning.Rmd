@@ -76,3 +76,42 @@ mytree <- rpart(
 predict_Fraud = predict(mytree, data=train, type = "class")
 table(train$Fraud, predict_Fraud)
 ```
+
+# Unsupervised Learning
+
+## Principle Component Analysis
+
+The main feature of unsupervised learning algorithms, when compared to classification and regression methods, is that input data are unlabeled (i.e. no labels or classes given) and that the algorithm learns the structure of the data without any assistance. This creates two main differences. First, it allows us to process large amounts of data because the data does not need to be manually labeled. Second, it is difficult to evaluate the quality of an unsupervised algorithm due to the absence of an explicit goodness metric as used in supervised learning.
+
+One of the most common tasks in unsupervised learning is dimensionality reduction. On one hand, dimensionality reduction may help with data visualization. On the other hand, it may help deal with the multicollinearity of our data and prepare the data for a supervised learning method (e.g. decision trees).
+
+To use PCA models algorithm in R, we can use "princomp" provided by R. This package has the "PCA" function in it. 
+
+Success and failure modes for Principle Component Analysis (PCA):
+**Advanages for PCA:**
+- Removes correlated features
+- Improves algorithm performance by reducing overfitting
+- Improves visualization by transforming high dimensional data to low dimensional data
+**Advanages for PCA:**
+- May miss some information as compared to the original list of features.
+- Independent principal components are not as readable and interpretable as original features sometimes.
+
+Reference:
+https://www.i2tutorials.com/what-are-the-pros-and-cons-of-the-pca/
+https://www.datacamp.com/tutorial/pca-analysis-r
+https://www.r-bloggers.com/2021/05/principal-component-analysis-pca-in-r/
+
+```{r}
+iris1<-iris[,-5]
+basePCA<-princomp(iris1)     # Default: center = TRUE, scale. = TRUE
+summary(basePCA)
+# PCA Visualization
+# install.packages('usethis')
+library(usethis)
+# install.packages('devtools')
+library(devtools)
+# install_github("vqv/ggbiplot")
+library(ggbiplot)
+ggbiplot(basePCA)
+```
+
